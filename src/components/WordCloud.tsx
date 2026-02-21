@@ -232,11 +232,11 @@ export function WordCloud({ responses }: WordCloudProps) {
           className="absolute pointer-events-none"
           style={{ left: '0%', top: '0%' }}
         >
-          <div className="bg-white rounded-full p-1 md:p-1.5 shadow-lg ring-2 ring-primary/20">
+          <div className="bg-white rounded-full p-1.5 md:p-2 shadow-lg ring-2 ring-primary/20">
             <img
               src={logo.src}
               alt={logo.alt}
-              className="w-9 h-9 md:w-12 md:h-12 rounded-full object-cover"
+              className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover"
             />
           </div>
         </div>

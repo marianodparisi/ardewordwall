@@ -48,9 +48,9 @@ export function PublicWall() {
         >
           <a
             href={`/preguntar?t=${session.token}`}
-            className="md:hidden inline-flex items-center gap-1.5 mt-3 bg-gradient-to-r from-primary to-accent text-white font-semibold text-sm px-5 py-2.5 rounded-full shadow-md active:scale-95 transition-transform"
+            className="md:hidden inline-flex items-center gap-2 mt-4 bg-gradient-to-r from-primary to-accent text-white font-semibold text-base px-6 py-3 rounded-full shadow-md active:scale-95 transition-transform"
           >
-            <span className="material-icons" style={{ fontSize: '18px' }}>edit</span>
+            <span className="material-icons" style={{ fontSize: '20px' }}>edit</span>
             Responder
           </a>
         </QuestionCard>
