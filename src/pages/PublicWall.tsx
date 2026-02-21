@@ -57,16 +57,16 @@ export function PublicWall() {
         <WordCloud responses={responses} />
       </main>
 
-      {/* QR code bottom-right — desktop only */}
-      <div className="hidden md:flex fixed bottom-6 right-6 z-50 bg-white rounded-2xl shadow-lg p-4 border border-gray-100 flex-col items-center gap-2">
+      {/* QR code top-right — desktop only */}
+      <div className="hidden md:flex fixed top-6 right-6 z-50 bg-white rounded-2xl shadow-lg p-5 border border-gray-100 flex-col items-center gap-2">
         <QRCodeSVG
           value={`${window.location.origin}/preguntar?t=${session.token}`}
-          size={120}
+          size={180}
           bgColor="#FFFFFF"
           fgColor="#E8583A"
           level="M"
         />
-        <span className="text-xs font-semibold text-primary">Escanea y responde</span>
+        <span className="text-sm font-semibold text-primary">Escanea y responde</span>
       </div>
     </div>
   )
