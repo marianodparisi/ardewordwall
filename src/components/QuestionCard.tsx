@@ -8,7 +8,8 @@ export function QuestionCard({ question, responseCount, children }: QuestionCard
   return (
     <div className="relative inline-block z-20">
       <div className="absolute -inset-4 bg-gradient-to-r from-primary to-secondary opacity-20 blur-xl rounded-full" />
-      <div className="bg-white rounded-2xl shadow-xl p-5 md:p-8 border border-gray-100 relative max-w-md mx-auto">
+      <div className="bg-gradient-to-r from-primary to-secondary rounded-2xl p-[3px] shadow-xl relative max-w-md mx-auto">
+      <div className="bg-white rounded-[13px] p-5 md:p-8">
         <img
           src="/arde.png"
           alt="Arde"
@@ -26,7 +27,8 @@ export function QuestionCard({ question, responseCount, children }: QuestionCard
           </span>
         </div>
 
-        {children}
+        <div className="text-center">{children}</div>
+      </div>
       </div>
     </div>
   )

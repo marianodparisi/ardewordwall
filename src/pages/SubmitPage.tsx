@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom'
 import { useActiveSession } from '../hooks/useActiveSession'
 import { useResponses } from '../hooks/useResponses'
 import { BackgroundPattern } from '../components/BackgroundPattern'
@@ -5,6 +6,8 @@ import { QuestionCard } from '../components/QuestionCard'
 import { SubmitForm } from '../components/SubmitForm'
 
 export function SubmitPage() {
+  const [searchParams] = useSearchParams()
+  const token = searchParams.get('t')
   const { session, loading: sessionLoading } = useActiveSession()
   const { responses, loading: responsesLoading } = useResponses(session?.id)
 
@@ -30,6 +33,25 @@ export function SubmitPage() {
           </h1>
           <p className="text-gray-500">
             Espera a que el administrador cree una nueva pregunta.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  // Validate token — must match the active session's token
+  if (!token || token !== session.token) {
+    return (
+      <div className="min-h-screen bg-background-light flex items-center justify-center">
+        <BackgroundPattern />
+        <div className="relative z-10 text-center p-8">
+          <img src="/arde.png" alt="Arde" className="w-16 h-16 rounded-xl mx-auto mb-4 object-contain" />
+          <span className="material-icons text-secondary text-5xl mb-3 block">lock</span>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">
+            Acceso no autorizado
+          </h1>
+          <p className="text-gray-500 max-w-xs mx-auto">
+            Escanea el codigo QR del evento para poder responder.
           </p>
         </div>
       </div>

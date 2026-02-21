@@ -101,10 +101,12 @@ function AdminPanel() {
     // Deactivate all existing sessions
     await supabase.from('sessions').update({ is_active: false }).eq('is_active', true)
 
-    // Create new one
+    // Create new one with unique token
+    const token = crypto.randomUUID()
     const { error } = await supabase.from('sessions').insert({
       question: newQuestion.trim(),
       is_active: true,
+      token,
     })
 
     if (error) {

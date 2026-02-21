@@ -1,5 +1,6 @@
 interface WordCardProps {
   word: string
+  emoji?: string | null
   index: number
   authorName?: string | null
   count?: number
@@ -11,7 +12,7 @@ const ACCENT_COLORS = [
   { badge: 'bg-accent', tag: 'bg-accent text-white' },
 ]
 
-export function WordCard({ word, index, authorName, count = 1 }: WordCardProps) {
+export function WordCard({ word, emoji, index, authorName, count = 1 }: WordCardProps) {
   const colors = ACCENT_COLORS[index % 3]
 
   return (
@@ -27,8 +28,9 @@ export function WordCard({ word, index, authorName, count = 1 }: WordCardProps) 
             </div>
           )}
 
-          {/* Word — uppercase, fills the card */}
-          <div className="p-2.5 px-3.5 md:p-3 md:px-5">
+          {/* Word + emoji — uppercase, fills the card */}
+          <div className="p-2.5 px-3.5 md:p-3 md:px-5 flex items-center gap-1.5">
+            {emoji && <span className="text-base md:text-lg leading-none">{emoji}</span>}
             <span className="font-extrabold text-sm md:text-base text-gray-800 uppercase tracking-wide">
               {word}
             </span>

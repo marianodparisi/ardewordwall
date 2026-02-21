@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { getEmojiForWord } from '../lib/gemini'
 import {
   getSubmissionId,
   incrementSubmissionCount,
@@ -43,9 +44,13 @@ export function useSubmitResponse(sessionId: string | undefined) {
     const anonymousId = getSubmissionId()
     const name = authorName?.trim() || null
 
+    // Get emoji from Gemini (non-blocking — null on failure)
+    const emoji = await getEmojiForWord(trimmed)
+
     const { error: insertError } = await supabase.from('responses').insert({
       session_id: sessionId,
       word: trimmed,
+      emoji,
       anonymous_id: anonymousId,
       author_name: name,
     })

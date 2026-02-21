@@ -8,6 +8,10 @@ const FLOATING_LOGOS = [
   { src: '/arde2.png', alt: 'Arde Logo 2' },
   { src: '/arde.png', alt: 'Arde Logo' },
   { src: '/arde2.png', alt: 'Arde Logo 2' },
+  { src: '/arde.png', alt: 'Arde Logo' },
+  { src: '/arde2.png', alt: 'Arde Logo 2' },
+  { src: '/arde.png', alt: 'Arde Logo' },
+  { src: '/arde2.png', alt: 'Arde Logo 2' },
 ]
 
 interface WordCloudProps {
@@ -17,6 +21,7 @@ interface WordCloudProps {
 interface GroupedResponse {
   key: string
   word: string
+  emoji: string | null
   count: number
   authorName: string | null
 }
@@ -33,14 +38,17 @@ function groupResponses(responses: Response[]): GroupedResponse[] {
     const existing = map.get(key)
     if (existing) {
       existing.count++
-      // Keep the first author name if any
       if (!existing.authorName && r.author_name) {
         existing.authorName = r.author_name
+      }
+      if (!existing.emoji && r.emoji) {
+        existing.emoji = r.emoji
       }
     } else {
       map.set(key, {
         key,
         word: r.word,
+        emoji: r.emoji,
         count: 1,
         authorName: r.author_name,
       })
@@ -106,7 +114,7 @@ export function WordCloud({ responses }: WordCloudProps) {
         if (el) {
           const startRotation = (Math.random() - 0.5) * 20
           gsap.set(el, { left: `${startPos.x}%`, top: `${startPos.y}%`, opacity: 0, scale: 0.3, rotation: startRotation })
-          gsap.to(el, { opacity: 0.5, scale: 1, duration: 1.2, ease: 'back.out(1.4)', delay: 0.3 + i * 0.2 })
+          gsap.to(el, { opacity: 1, scale: 1, duration: 1.2, ease: 'back.out(1.4)', delay: 0.3 + i * 0.15 })
           const swingAmount = 5 + Math.random() * 8
           const swingDuration = 5 + Math.random() * 5
           gsap.to(el, {
@@ -224,11 +232,13 @@ export function WordCloud({ responses }: WordCloudProps) {
           className="absolute pointer-events-none"
           style={{ left: '0%', top: '0%' }}
         >
-          <img
-            src={logo.src}
-            alt={logo.alt}
-            className="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover drop-shadow-md"
-          />
+          <div className="bg-white rounded-full p-1 md:p-1.5 shadow-lg ring-2 ring-primary/20">
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              className="w-9 h-9 md:w-12 md:h-12 rounded-full object-cover"
+            />
+          </div>
         </div>
       ))}
 
@@ -240,7 +250,7 @@ export function WordCloud({ responses }: WordCloudProps) {
           className="absolute pointer-events-auto"
           style={{ left: '0%', top: '0%' }}
         >
-          <WordCard word={g.word} index={i} authorName={g.authorName} count={g.count} />
+          <WordCard word={g.word} emoji={g.emoji} index={i} authorName={g.authorName} count={g.count} />
         </div>
       ))}
     </div>

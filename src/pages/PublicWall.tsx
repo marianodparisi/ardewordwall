@@ -47,7 +47,7 @@ export function PublicWall() {
           responseCount={responses.length}
         >
           <a
-            href="/preguntar"
+            href={`/preguntar?t=${session.token}`}
             className="md:hidden inline-flex items-center gap-1.5 mt-3 bg-gradient-to-r from-primary to-accent text-white font-semibold text-sm px-5 py-2.5 rounded-full shadow-md active:scale-95 transition-transform"
           >
             <span className="material-icons" style={{ fontSize: '18px' }}>edit</span>
@@ -60,7 +60,7 @@ export function PublicWall() {
       {/* QR code bottom-right — desktop only */}
       <div className="hidden md:flex fixed bottom-6 right-6 z-50 bg-white rounded-2xl shadow-lg p-4 border border-gray-100 flex-col items-center gap-2">
         <QRCodeSVG
-          value={`${window.location.origin}/preguntar`}
+          value={`${window.location.origin}/preguntar?t=${session.token}`}
           size={120}
           bgColor="#FFFFFF"
           fgColor="#E8583A"

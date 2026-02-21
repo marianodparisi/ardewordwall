@@ -2,6 +2,7 @@ export interface Session {
   id: string
   question: string
   is_active: boolean
+  token: string
   created_at: string
 }
 
