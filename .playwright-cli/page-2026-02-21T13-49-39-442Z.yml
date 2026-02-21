@@ -1,0 +1,17 @@
+- main [ref=e7]:
+  - generic [ref=e10]:
+    - generic [ref=e12]: psychology_alt
+    - heading "pregunta random" [level=1] [ref=e13]
+    - generic [ref=e16]: 16 respuestas
+    - paragraph [ref=e17]: Envia tu respuesta y mira como crece el muro de palabras.
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - textbox "Escribe tu respuesta..." [ref=e20]
+        - generic [ref=e21]: 0/30
+      - button "add_circle Enviar respuesta" [disabled] [ref=e22]:
+        - generic [ref=e23]: add_circle
+        - text: Enviar respuesta
+      - generic [ref=e24]:
+        - paragraph [ref=e25]: Max 30 caracteres. Timer de 5 min entre envios.
+        - link "Ver muro" [ref=e26] [cursor=pointer]:
+          - /url: /

@@ -1,0 +1,23 @@
+- generic [ref=e12]:
+  - generic [ref=e13]:
+    - generic [ref=e15]: admin_panel_settings
+    - heading "Word Wall Admin" [level=1] [ref=e16]
+  - generic [ref=e17]:
+    - heading "add_circle Nueva Pregunta" [level=2] [ref=e18]:
+      - generic [ref=e19]: add_circle
+      - text: Nueva Pregunta
+    - generic [ref=e20]:
+      - textbox "Escribe la pregunta para los participantes..." [ref=e21]
+      - button "Crear Sesion" [disabled] [ref=e22]
+  - generic [ref=e23]:
+    - generic [ref=e24]:
+      - heading "Sesion Activa" [level=2] [ref=e25]: Sesion Activa
+      - generic [ref=e27]: 1 respuestas
+    - paragraph [ref=e28]: pregunta random
+    - generic [ref=e29]:
+      - button "visibility Ver respuestas" [ref=e30]:
+        - generic [ref=e31]: visibility
+        - text: Ver respuestas
+      - button "stop_circle Terminar" [ref=e32]:
+        - generic [ref=e33]: stop_circle
+        - text: Terminar

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tropical Word Wall Live Session</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0D5C63", // Deep Jungle Green as primary
+                        secondary: "#FF7B9C", // Hibiscus Pink
+                        accent: "#44D5C6", // Bright Turquoise
+                        "background-light": "#FAFCFA", // Very subtle green-white
+                        "background-dark": "#062C30", // Dark Jungle
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                    backgroundImage: {
+                        'tropical-pattern': "url('https://www.transparenttextures.com/patterns/leaf.png')", // Faint pattern placeholder
+                    }
+                },
+            },
+        };
+    </script>
+<style>
+        .dotted-line {
+            background-image: linear-gradient(to right, #44D5C6 33%, rgba(255,255,255,0) 0%);
+            background-position: bottom;
+            background-size: 8px 1px;
+            background-repeat: repeat-x;
+        }
+        .dotted-line-vertical {
+            background-image: linear-gradient(to bottom, #44D5C6 33%, rgba(255,255,255,0) 0%);
+            background-position: right;
+            background-size: 1px 8px;
+            background-repeat: repeat-y;
+        }@keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        .floating-delayed {
+            animation: float 7s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        .floating-delayed-2 {
+            animation: float 8s ease-in-out infinite;
+            animation-delay: 2s;
+        }.connector-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .connector-line {
+            stroke: #44D5C6;
+            stroke-width: 2;
+            stroke-dasharray: 6, 6;
+            fill: none;
+            opacity: 0.6;
+        }
+        .dark .connector-line {
+            stroke: #44D5C6;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans transition-colors duration-300 relative overflow-hidden min-h-screen">
+<div class="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAT_hu2OUIZELpQ3-ZFiRMnAGFeCd-uIrjCr96eMdi4e41xkepFKQqbJGOKwHFUOinxmYs9c1Jay1GsChN2FyxyDRHOAhfp5WyloUXRjY0PCBlyHvhIwE_OhTlw1NkHXurlugQzIRAiVkePHEq6EBFSaDgBJXPhYgQ6h01hcPMIQRzTpKSTBHe3jpnXpPcqo4sP2UgNhJw53ILfc30y0swjjXRhh2NpX1iqmS3k5l76rYWBtFJuSf4-ZLc-uHPS8vG4HnkoykU66Ug'); background-size: 300px;">
+</div>
+<svg class="connector-svg hidden md:block">
+<path class="connector-line" d="M 50% 35% C 40% 30%, 25% 25%, 20% 20%"></path>
+<path class="connector-line" d="M 50% 35% C 60% 30%, 75% 25%, 80% 20%"></path>
+<path class="connector-line" d="M 50% 45% C 40% 50%, 25% 60%, 22% 70%"></path>
+<path class="connector-line" d="M 50% 45% C 60% 50%, 75% 60%, 78% 70%"></path>
+<path class="connector-line" d="M 50% 40% C 40% 40%, 15% 45%, 10% 45%"></path>
+<path class="connector-line" d="M 50% 40% C 60% 40%, 85% 45%, 90% 45%"></path>
+</svg>
+<nav class="relative z-50 flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<div class="bg-primary text-white p-2 rounded-lg">
+<span class="material-icons text-xl">spa</span>
+</div>
+<span class="text-xl font-bold text-gray-900 dark:text-white tracking-tight">Jungle<span class="text-primary dark:text-accent">Wall</span></span>
+</div>
+<div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+<a class="hover:text-primary dark:hover:text-accent transition-colors" href="#">Sessions</a>
+<a class="hover:text-primary dark:hover:text-accent transition-colors" href="#">Reports</a>
+<a class="hover:text-primary dark:hover:text-accent transition-colors" href="#">Themes</a>
+<a class="hover:text-primary dark:hover:text-accent transition-colors" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block text-gray-600 dark:text-gray-300 font-medium hover:text-gray-900 dark:hover:text-white text-sm">Log in</button>
+<button class="bg-secondary hover:bg-pink-400 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-pink-200 dark:shadow-none transition-all">
+                Add Word
+            </button>
+</div>
+</nav>
+<main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-24 text-center">
+<div class="relative inline-block mb-12 mt-8 z-20">
+<div class="absolute -inset-4 bg-gradient-to-r from-accent to-secondary opacity-20 blur-xl rounded-full"></div>
+<div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-100 dark:border-gray-700 relative">
+<div class="w-16 h-16 bg-primary/10 dark:bg-primary/30 rounded-xl flex items-center justify-center mx-auto mb-4 text-primary dark:text-accent">
+<span class="material-icons text-3xl">psychology_alt</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight leading-tight">
+                    What defines a <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Great Leader?</span>
+</h1>
+<p class="text-gray-500 dark:text-gray-400 max-w-lg mx-auto mb-6">
+                    Submit your thoughts. Watch the jungle grow as ideas connect.
+                </p>
+<div class="flex items-center justify-center gap-2 mb-2">
+<div class="flex -space-x-2 overflow-hidden">
+<img alt="User Avatar" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZzWCvzy9SmbfRG7rBm8_osubkgVaMWb1F2pYdcmiB2DnPHU8NB35ndbNvo0t19-upbWZSGOTlAlflDAEWEQznsmM5kOX9u_ShO6-1R_bX8QsRNFSpCvuzQV4hDGAscSNlToq1DqWvt37MFfVDmwFPYEEZ3M1sTpsjuNvdmSMYd4E-F7f542FF2r16Sg4xwHpIIcg5WgbLH5zPtcysRgnjYvKlGxJVPxPzNdoPSQSUS4TQkCl_P4kGhp2JtgQbSEO3BP8BUPc8vrQ"/>
+<img alt="User Avatar" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcgdtRu_tnJ4z9bFMDrvfaL47_TOIgZsBd8iUjS2DGgnwuesuF7i9QnvhFNSShMkS4m3U0HRRbDTiygKSyd7UV1xoBrsTmeDi80hYFnfX9c_noMGxZeoiNkfqJYCY_yprwU8EaZskRfBqZvx99HpCcxdgcGjENel-0N66wEKckXfbrac5K7ZqvyRIFn8IvvjhMzu3G0ZAdT3CNTwCP5zWmehHX6QN1nU3Ja6RIG6V3Vuoy-gREGWZefT0CT-X2fq4EO1UNlCqAMA4"/>
+<img alt="User Avatar" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwe8JdCWOhd4ovmjDi9PRwiAU_m5r1_cdLxv_0cxMW2oWfM_YFovlhv8QAPPRrkBIKWVFXih-ukqk4lPc2ngY1e-WIfCnvvZJkWX4Q9WNeOh768ZUow0FlQrTD4Xa9P9KDlDNO4lzScFMYcsQ0XFFSKbCqRSOZMOEav_mGrt970DK8HQDS-7e2OsTI1O7gNRps35-qgRIQA3fddbF-7cHFYAde8jtW9Se57aN3FJ1xBZMmT-_uYxUoNUiKU-Dlyp7mEeb8dbJ47Po"/>
+<img alt="User Avatar" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_IhYkzuO_ysIMnfmTk1CXiZzC_m2Z0hIXkLJMMbMkvgr_KGbAoUXCmHDYeG-zynqW-HGXp_7AxondfqqInaPXAyljdwSNgjfqL04Bd4Yv3mtdtCeJOcsm62f5UFD5Hn8tsvkvTrmo4AlAfcagYYnQddpTEFCZ3fNznEn51DKYdjkLh3tAhFmK7ZYco51EwlrwEhTzGapXtDNLMjnzKmzSYQeorsn9XGG5WDjPy9ve3Ic1ExjDVM7RHsglaEMV35Q7L3J-_Pg6FSM"/>
+</div>
+<span class="text-sm font-semibold text-gray-600 dark:text-gray-300 ml-2">24 active contributors</span>
+</div>
+<button class="mt-6 w-full bg-primary hover:bg-teal-800 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-teal-900/20 transition-transform transform hover:-translate-y-0.5 flex items-center justify-center gap-2 text-lg">
+<span class="material-icons">add_circle</span>
+                    Add Your Word
+                </button>
+<p class="mt-3 text-xs text-gray-400 dark:text-gray-500">No login required for guests.</p>
+</div>
+</div>
+<div class="absolute top-32 left-10 md:left-20 floating hidden lg:block">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-secondary max-w-[180px] text-left">
+<h3 class="font-bold text-gray-800 dark:text-white">Empathy</h3>
+<div class="flex items-center mt-2">
+<div class="h-1.5 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%]"></div>
+</div>
+<span class="ml-2 text-xs text-gray-500">85%</span>
+</div>
+<div class="absolute -right-2 -top-2 bg-white dark:bg-gray-700 rounded-full p-1 shadow-sm">
+<img alt="user" class="w-6 h-6 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsSnEo6OVOXV27KoWP9wrrHkkcklon7wYmO9fioAWXOrNWert9SNJ-UoXCDvyM0EvfRxgaERZklwssqzpWyVTnjhJWy2fTIS5OCBX50hKTLZI7ETbPXjrW7X0zSTEriEYkJfYZUwXtTPw7djVTYBdPXlQu8_hLxXIY1TQGnDBWU0fatTzVFVUF-KP3QxO4SiFiYmDp4sELTk_Yiv9Ag6rUtGZ1dH92pS3B_ombeW-JE9YD92Eq-nlLPwPMhkbnxe37u_2o-B9KUjI"/>
+</div>
+</div>
+</div>
+<div class="absolute top-28 right-10 md:right-32 floating-delayed hidden lg:block">
+<div class="bg-white dark:bg-gray-800 p-3 rounded-xl shadow-md border-l-4 border-accent max-w-[160px] text-left">
+<h3 class="font-bold text-gray-800 dark:text-white text-sm">Visionary</h3>
+<div class="flex items-center mt-2">
+<div class="h-1.5 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full bg-accent w-[60%]"></div>
+</div>
+</div>
+<div class="absolute -left-2 -bottom-2 bg-white dark:bg-gray-700 rounded-full p-1 shadow-sm">
+<img alt="user" class="w-6 h-6 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_o4ChZm3K5Lk-xJVRvwSQj2aM3MqN8_FmsWR_rWKbkzjeU3GelQlItnl3qKH4weJxDMGJD2tmWpH41bAT-FzIjJAgx5loLEAcI1DEt1mprCz9ciYSaVGH4baC2QQ-PFzBnpI2jlLi21cx8ncykgjMKPBZDADfQK9vay-NUKKRO75zULdWN5pa44FcIqHLwTF3Dn5VQF4JgGo_fKZfblcf56pUOsb0MMUlR1KdE4nZzPruJhuuv2JLWCPSfWas58z2GxJZG6_xmAo"/>
+</div>
+</div>
+</div>
+<div class="absolute top-1/2 left-4 md:left-12 -translate-y-1/2 floating-delayed-2 hidden md:block">
+<div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 flex items-center gap-3">
+<div class="bg-primary/10 text-primary p-2 rounded-md">
+<span class="material-icons text-sm">thumb_up</span>
+</div>
+<div>
+<h3 class="font-semibold text-gray-800 dark:text-white text-sm">Integrity</h3>
+<p class="text-xs text-gray-500">12 votes</p>
+</div>
+</div>
+</div>
+<div class="absolute top-[60%] right-6 md:right-16 floating hidden md:block">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 max-w-[200px] text-left transform rotate-3">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-gray-800 dark:text-white">Decisive</h3>
+<span class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-[10px] px-2 py-0.5 rounded-full font-bold">NEW</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400 italic">"Making hard calls when necessary..."</p>
+<div class="mt-3 flex -space-x-1">
+<img alt="User Avatar" class="h-5 w-5 rounded-full ring-1 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn9e2Gi1I6M7-drsX7nEVZXfsFeHrtF38yPoKT9o8otvIx5uYwnSmWNouv3AmWM6nHwU93Ji7GDvpYCqaPseCWge5rZdyQG1tawbtmGmAMSJL0UbJYP1QgAMEYSUPwEorMTSe13GojM6BgbDJle63RP1r7qCjbXlNUludFyqn5uTI_2YzJQ0W5PtaO9ZpfKmaBjuiMqTdnwZvatKsQ6zoxLRQBqKrYwEP7nzzpgCG89EdFk_zkXPOZ_S-AJ_kfmbUJsNTkL3nbbQM"/>
+<img alt="User Avatar" class="h-5 w-5 rounded-full ring-1 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqPQgOgfo-OrEZnHlQUmXd1jcrfr7bCSMwwB4NuqRYFKHWKdQ1v_NwdUK0yyKvL4VuriZ1yJ9-vkZWSux33iJx8UHXLixcP0kJ-KN4Esi-WQhwoSoVi9y4e__r9-kAeytvixqplJKa7BS6Nl6jMFREh9DIYprxLTQohAS2C8XTBecw8Cr41UqwkIZxIBE2yVHAP-BQzVd9hQZiJ5M6RAyaZvEXbF7xixnE7uTj7R0EqoaLWDI6XQMrEfaE6rzIakn67sKnZ-DmoRo"/>
+</div>
+</div>
+</div>
+<div class="absolute bottom-10 left-10 md:left-24 floating-delayed-2 hidden xl:block z-0 opacity-80 hover:opacity-100 transition-opacity">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-xl w-64 border border-gray-100 dark:border-gray-700">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold text-gray-400 uppercase">Recent Activity</span>
+<span class="material-icons text-gray-300 text-sm">more_horiz</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-pink-100 text-pink-500 flex items-center justify-center text-xs font-bold">JL</div>
+<div class="text-left">
+<p class="text-sm font-medium text-gray-800 dark:text-white">Added "Humility"</p>
+<p class="text-[10px] text-gray-400">2 mins ago</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-xs font-bold">MK</div>
+<div class="text-left">
+<p class="text-sm font-medium text-gray-800 dark:text-white">Upvoted "Vision"</p>
+<p class="text-[10px] text-gray-400">5 mins ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-20 right-10 md:right-48 floating hidden xl:block z-0 opacity-80 hover:opacity-100 transition-opacity">
+<div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-xl w-56 border border-gray-100 dark:border-gray-700">
+<div class="flex items-end justify-between">
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Words</p>
+<p class="text-2xl font-bold text-gray-900 dark:text-white">142</p>
+</div>
+<div class="h-8 w-16 bg-green-50 dark:bg-green-900/30 rounded flex items-end justify-around px-1 pb-1">
+<div class="w-2 bg-primary h-[40%] rounded-sm"></div>
+<div class="w-2 bg-primary h-[70%] rounded-sm"></div>
+<div class="w-2 bg-primary h-[100%] rounded-sm"></div>
+<div class="w-2 bg-primary h-[60%] rounded-sm"></div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+<span class="text-xs font-semibold text-secondary">+12% vs last session</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex gap-6 md:gap-12 opacity-80">
+<div class="bg-white dark:bg-gray-800 p-3 rounded-2xl shadow-lg flex flex-col items-center w-16 h-16 justify-center floating">
+<span class="material-icons text-secondary text-2xl">favorite</span>
+</div>
+<div class="bg-white dark:bg-gray-800 p-3 rounded-2xl shadow-lg flex flex-col items-center w-16 h-16 justify-center floating-delayed mt-8">
+<span class="material-icons text-accent text-2xl">share</span>
+</div>
+<div class="bg-white dark:bg-gray-800 p-3 rounded-2xl shadow-lg flex flex-col items-center w-16 h-16 justify-center floating-delayed-2">
+<span class="material-icons text-primary text-2xl">download</span>
+</div>
+</div>
+</main>
+<footer class="absolute bottom-4 w-full text-center z-20 pointer-events-none">
+<p class="text-xs text-gray-400 dark:text-gray-600">Powered by JungleWall AI • Version 2.0</p>
+</footer>
+
+</body></html>

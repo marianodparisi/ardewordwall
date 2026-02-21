@@ -1,0 +1,26 @@
+- generic [ref=e3]:
+  - main [ref=e7]:
+    - generic [ref=e10]:
+      - generic [ref=e12]: psychology_alt
+      - heading "pregunta random" [level=1] [ref=e13]
+      - generic [ref=e16]: 16 respuestas
+    - generic:
+      - generic [ref=e18]: hola
+      - generic [ref=e20]: Liderazgo
+      - generic [ref=e22]: Empatia
+      - generic [ref=e24]: Creatividad
+      - generic [ref=e26]: Resiliencia
+      - generic [ref=e28]: Comunicacion
+      - generic [ref=e30]: Honestidad
+      - generic [ref=e32]: Innovacion
+      - generic [ref=e34]: Compromiso
+      - generic [ref=e36]: Paciencia
+      - generic [ref=e38]: Adaptabilidad
+      - generic [ref=e40]: Confianza
+      - generic [ref=e42]: Trabajo en equipo
+      - generic [ref=e44]: Responsabilidad
+      - generic [ref=e46]: Perseverancia
+      - generic [ref=e48]: Humildad
+  - generic [ref=e49]:
+    - img [ref=e50]
+    - generic [ref=e53]: Escanea y responde
