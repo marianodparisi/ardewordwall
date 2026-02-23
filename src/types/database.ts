@@ -3,6 +3,10 @@ export interface Session {
   question: string
   is_active: boolean
   token: string
+  theme?: 'classic' | 'oceano' | 'sunset' | 'tropical' | null
+  max_chars?: number | null
+  allow_emoji?: boolean | null
+  allow_name?: boolean | null
   created_at: string
 }
 

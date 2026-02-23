@@ -8,7 +8,13 @@ import {
   startCooldown,
 } from '../lib/anonymous-id'
 
-export function useSubmitResponse(sessionId: string | undefined) {
+interface SubmitOptions {
+  maxChars: number
+  allowEmoji: boolean
+  allowName: boolean
+}
+
+export function useSubmitResponse(sessionId: string | undefined, options: SubmitOptions) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [cooldownMs, setCooldownMs] = useState(() =>
@@ -18,34 +24,37 @@ export function useSubmitResponse(sessionId: string | undefined) {
   const onCooldown = cooldownMs > 0
 
   async function submit(word: string, authorName?: string) {
-    if (!sessionId) return
+    if (!sessionId) return false
 
     // Re-check cooldown from localStorage
     const remaining = getCooldownRemaining(sessionId)
     if (remaining > 0) {
       setCooldownMs(remaining)
       setError('Espera a que termine el timer')
-      return
+      return false
     }
 
     const trimmed = word.trim()
     if (!trimmed) {
       setError('Escribe una palabra')
-      return
+      return false
     }
-    if (trimmed.length > 30) {
-      setError('Maximo 30 caracteres')
-      return
+    if (trimmed.length > options.maxChars) {
+      setError(`Maximo ${options.maxChars} caracteres`)
+      return false
     }
 
     setLoading(true)
     setError(null)
 
     const anonymousId = getSubmissionId()
-    const name = authorName?.trim() || null
+    const name = options.allowName ? authorName?.trim() || null : null
 
-    // Get emoji from Gemini (non-blocking — null on failure)
-    const emoji = await getEmojiForWord(trimmed)
+    let emoji: string | null = null
+    if (options.allowEmoji) {
+      // Get emoji from Gemini (non-blocking — null on failure)
+      emoji = await getEmojiForWord(trimmed)
+    }
 
     const { error: insertError } = await supabase.from('responses').insert({
       session_id: sessionId,
@@ -58,6 +67,8 @@ export function useSubmitResponse(sessionId: string | undefined) {
     if (insertError) {
       setError('Error al enviar. Intenta de nuevo.')
       console.error('Submit error:', insertError)
+      setLoading(false)
+      return false
     } else {
       incrementSubmissionCount()
       startCooldown(sessionId)
@@ -65,6 +76,7 @@ export function useSubmitResponse(sessionId: string | undefined) {
     }
 
     setLoading(false)
+    return true
   }
 
   return { submit, loading, error, onCooldown, cooldownMs, setCooldownMs }

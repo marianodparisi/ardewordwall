@@ -4,16 +4,19 @@ import { useResponses } from '../hooks/useResponses'
 import { BackgroundPattern } from '../components/BackgroundPattern'
 import { QuestionCard } from '../components/QuestionCard'
 import { SubmitForm } from '../components/SubmitForm'
+import { getSessionConfig, getThemeStyle } from '../lib/session-config'
 
 export function SubmitPage() {
   const [searchParams] = useSearchParams()
   const token = searchParams.get('t')
   const { session, loading: sessionLoading } = useActiveSession()
   const { responses, loading: responsesLoading } = useResponses(session?.id)
+  const config = getSessionConfig(session)
+  const themeStyle = getThemeStyle(config.theme)
 
   if (sessionLoading || responsesLoading) {
     return (
-      <div className="min-h-screen bg-background-light flex items-center justify-center">
+      <div className="min-h-screen bg-background-light flex items-center justify-center" style={themeStyle}>
         <div className="text-center">
           <span className="material-icons text-accent text-4xl animate-spin">refresh</span>
           <p className="text-gray-500 mt-3 font-medium">Cargando...</p>
@@ -24,7 +27,7 @@ export function SubmitPage() {
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-background-light flex items-center justify-center">
+      <div className="min-h-screen bg-background-light flex items-center justify-center" style={themeStyle}>
         <BackgroundPattern />
         <div className="relative z-10 text-center p-8">
           <img src="/arde.png" alt="Arde" className="w-16 h-16 rounded-xl mx-auto mb-4 object-contain" />
@@ -42,7 +45,7 @@ export function SubmitPage() {
   // Validate token — must match the active session's token
   if (!token || token !== session.token) {
     return (
-      <div className="min-h-screen bg-background-light flex items-center justify-center">
+      <div className="min-h-screen bg-background-light flex items-center justify-center" style={themeStyle}>
         <BackgroundPattern />
         <div className="relative z-10 text-center p-8">
           <img src="/arde.png" alt="Arde" className="w-16 h-16 rounded-xl mx-auto mb-4 object-contain" />
@@ -59,7 +62,7 @@ export function SubmitPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background-light relative overflow-hidden">
+    <div className="min-h-screen bg-background-light relative overflow-hidden" style={themeStyle}>
       <BackgroundPattern />
 
       <main className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-12">
@@ -70,7 +73,12 @@ export function SubmitPage() {
           <p className="text-gray-500 max-w-sm mx-auto mb-4 text-sm">
             Envia tu respuesta y mira como crece el muro de palabras.
           </p>
-          <SubmitForm sessionId={session.id} />
+          <SubmitForm
+            sessionId={session.id}
+            maxChars={config.max_chars}
+            allowName={config.allow_name}
+            allowEmoji={config.allow_emoji}
+          />
         </QuestionCard>
       </main>
     </div>

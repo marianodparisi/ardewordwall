@@ -16,6 +16,8 @@ const FLOATING_LOGOS = [
 
 interface WordCloudProps {
   responses: Response[]
+  showEmoji?: boolean
+  showNames?: boolean
 }
 
 interface GroupedResponse {
@@ -31,26 +33,30 @@ interface CardState {
   vy: number
 }
 
-function groupResponses(responses: Response[]): GroupedResponse[] {
+function groupResponses(
+  responses: Response[],
+  showEmoji: boolean,
+  showNames: boolean
+): GroupedResponse[] {
   const map = new Map<string, GroupedResponse>()
   for (const r of responses) {
     const key = r.word.toLowerCase().trim()
     const existing = map.get(key)
     if (existing) {
       existing.count++
-      if (!existing.authorName && r.author_name) {
+      if (showNames && !existing.authorName && r.author_name) {
         existing.authorName = r.author_name
       }
-      if (!existing.emoji && r.emoji) {
+      if (showEmoji && !existing.emoji && r.emoji) {
         existing.emoji = r.emoji
       }
     } else {
       map.set(key, {
         key,
         word: r.word,
-        emoji: r.emoji,
+        emoji: showEmoji ? r.emoji : null,
         count: 1,
-        authorName: r.author_name,
+        authorName: showNames ? r.author_name : null,
       })
     }
   }
@@ -70,8 +76,11 @@ function randomVelocity(): { vx: number; vy: number } {
   return { vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed }
 }
 
-export function WordCloud({ responses }: WordCloudProps) {
-  const grouped = useMemo(() => groupResponses(responses), [responses])
+export function WordCloud({ responses, showEmoji = true, showNames = true }: WordCloudProps) {
+  const grouped = useMemo(
+    () => groupResponses(responses, showEmoji, showNames),
+    [responses, showEmoji, showNames]
+  )
 
   const containerRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
