@@ -1,4 +1,28 @@
-export function BackgroundPattern() {
+import type { SessionTheme } from '../lib/session-config'
+
+interface BackgroundPatternProps {
+  theme?: SessionTheme
+}
+
+export function BackgroundPattern({ theme = 'classic' }: BackgroundPatternProps) {
+  if (theme === 'tropical') {
+    return (
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div
+          className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+          style={{ backgroundImage: "url('/fondo.jpeg')" }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(6,95,99,0.10) 0%, rgba(17,94,89,0.06) 60%, rgba(8,120,124,0.12) 100%)',
+          }}
+        />
+      </div>
+    )
+  }
+
   const primary = 'var(--color-primary)'
   const secondary = 'var(--color-secondary)'
   const accent = 'var(--color-accent)'

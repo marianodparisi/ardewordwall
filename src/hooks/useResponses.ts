@@ -8,6 +8,7 @@ export function useResponses(sessionId: string | undefined) {
 
   useEffect(() => {
     if (!sessionId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResponses([])
       setLoading(false)
       return

@@ -28,7 +28,7 @@ export function SubmitPage() {
   if (!session) {
     return (
       <div className="min-h-screen bg-background-light flex items-center justify-center" style={themeStyle}>
-        <BackgroundPattern />
+        <BackgroundPattern theme={config.theme} />
         <div className="relative z-10 text-center p-8">
           <img src="/arde.png" alt="Arde" className="w-16 h-16 rounded-xl mx-auto mb-4 object-contain" />
           <h1 className="text-2xl font-bold text-gray-800 mb-2">
@@ -46,7 +46,7 @@ export function SubmitPage() {
   if (!token || token !== session.token) {
     return (
       <div className="min-h-screen bg-background-light flex items-center justify-center" style={themeStyle}>
-        <BackgroundPattern />
+        <BackgroundPattern theme={config.theme} />
         <div className="relative z-10 text-center p-8">
           <img src="/arde.png" alt="Arde" className="w-16 h-16 rounded-xl mx-auto mb-4 object-contain" />
           <span className="material-icons text-secondary text-5xl mb-3 block">lock</span>
@@ -63,12 +63,13 @@ export function SubmitPage() {
 
   return (
     <div className="min-h-screen bg-background-light relative overflow-hidden" style={themeStyle}>
-      <BackgroundPattern />
+      <BackgroundPattern theme={config.theme} />
 
       <main className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-12">
         <QuestionCard
           question={session.question}
           responseCount={responses.length}
+          theme={config.theme}
         >
           <p className="text-gray-500 max-w-sm mx-auto mb-4 text-sm">
             Envia tu respuesta y mira como crece el muro de palabras.

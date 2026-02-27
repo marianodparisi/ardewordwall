@@ -24,6 +24,7 @@ const THEME_STYLES: Record<SessionTheme, Record<string, string>> = {
     '--color-accent': '#F07C5A',
     '--color-warm': '#D94425',
     '--color-background-light': '#FFF8F0',
+    '--font-display': '"Plus Jakarta Sans", sans-serif',
   },
   oceano: {
     '--color-primary': '#0F766E',
@@ -31,6 +32,7 @@ const THEME_STYLES: Record<SessionTheme, Record<string, string>> = {
     '--color-accent': '#14B8A6',
     '--color-warm': '#0E7490',
     '--color-background-light': '#ECFEFF',
+    '--font-display': '"Plus Jakarta Sans", sans-serif',
   },
   sunset: {
     '--color-primary': '#7C2D12',
@@ -38,13 +40,15 @@ const THEME_STYLES: Record<SessionTheme, Record<string, string>> = {
     '--color-accent': '#F97316',
     '--color-warm': '#B91C1C',
     '--color-background-light': '#FFF7ED',
+    '--font-display': '"Plus Jakarta Sans", sans-serif',
   },
   tropical: {
-    '--color-primary': '#0F766E',
-    '--color-secondary': '#FDE68A',
-    '--color-accent': '#2DD4BF',
-    '--color-warm': '#15803D',
-    '--color-background-light': '#F0FDFA',
+    '--color-primary': '#0D6F78',
+    '--color-secondary': '#E48B1F',
+    '--color-accent': '#2CA6A1',
+    '--color-warm': '#075A5F',
+    '--color-background-light': '#F0DE97',
+    '--font-display': '"Bungee", sans-serif',
   },
 }
 
@@ -52,7 +56,7 @@ const THEME_COLORS: Record<SessionTheme, { primary: string; background: string }
   classic: { primary: '#E8583A', background: '#FFF8F0' },
   oceano: { primary: '#0F766E', background: '#ECFEFF' },
   sunset: { primary: '#7C2D12', background: '#FFF7ED' },
-  tropical: { primary: '#0F766E', background: '#F0FDFA' },
+  tropical: { primary: '#0D6F78', background: '#EFD98E' },
 }
 
 function normalizeTheme(theme: Session['theme']): SessionTheme {

@@ -63,7 +63,7 @@ function groupResponses(
   return Array.from(map.values())
 }
 
-function randomStartPosition(_index: number): { x: number; y: number } {
+function randomStartPosition(): { x: number; y: number } {
   return {
     x: 2 + Math.random() * 85,
     y: 2 + Math.random() * 85,
@@ -111,7 +111,7 @@ export function WordCloud({ responses, showEmoji = true, showNames = true }: Wor
     // Initialize floating logos (once)
     if (!logosInitRef.current) {
       for (let i = 0; i < FLOATING_LOGOS.length; i++) {
-        const startPos = randomStartPosition(i)
+        const startPos = randomStartPosition()
         const vel = randomVelocity()
         // Slightly slower than word cards for visual variety
         vel.vx *= 0.6
@@ -141,7 +141,7 @@ export function WordCloud({ responses, showEmoji = true, showNames = true }: Wor
 
     // Initialize new word cards
     for (let i = prevCountRef.current; i < grouped.length; i++) {
-      const startPos = randomStartPosition(i)
+      const startPos = randomStartPosition()
       const vel = randomVelocity()
       positionsRef.current[i] = { x: startPos.x, y: startPos.y }
       statesRef.current[i] = { vx: vel.vx, vy: vel.vy }

@@ -37,7 +37,7 @@ export function SubmitForm({ sessionId, maxChars, allowName, allowEmoji }: Submi
       })
     }, 1000)
     return () => clearInterval(interval)
-  }, [cooldownMs > 0, setCooldownMs])
+  }, [cooldownMs, setCooldownMs])
 
   if (onCooldown) {
     return (
